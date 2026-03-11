@@ -67,7 +67,7 @@ GitHub 기본 runner는 내 PC 안의 minikube에 접근할 수 없습니다.
 
 ## 5. 지금 레포에서 연결된 파일
 
-현재 이 레포에는 self-hosted runner 기준 workflow가 들어 있습니다.
+현재 이 레포에는 self-hosted runner 기준 workflow와 실행 스크립트가 들어 있습니다.
 
 - [local-cicd.yml](/Users/parkjinwoo/source/study/grepp_BE2/.github/workflows/local-cicd.yml)
 
@@ -76,11 +76,17 @@ GitHub 기본 runner는 내 PC 안의 minikube에 접근할 수 없습니다.
 1. self-hosted runner에서 실행
 2. 저장소 체크아웃
 3. JDK 설정
-4. `MSA/scripts/local/local-cicd.sh` 실행
+4. 운영체제에 맞는 로컬 배포 스크립트 실행
 
 실행 스크립트:
 
-- [local-cicd.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/local/local-cicd.sh)
+- [README.md](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/README.md)
+- mac: [1_check_runner_env.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/mac/1_check_runner_env.sh)
+- mac: [2_run_local_cicd.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/mac/2_run_local_cicd.sh)
+- mac: [3_check_local_cicd.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/mac/3_check_local_cicd.sh)
+- Windows: [1_check_runner_env.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/windows/1_check_runner_env.bat)
+- Windows: [2_run_local_cicd.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/windows/2_run_local_cicd.bat)
+- Windows: [3_check_local_cicd.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/windows/3_check_local_cicd.bat)
 
 ## 6. 설치 흐름
 

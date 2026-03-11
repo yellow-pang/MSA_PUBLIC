@@ -78,7 +78,8 @@
 
 그리고 self-hosted runner를 쓰면 아래 스크립트가 전체 순서를 한 번에 실행합니다.
 
-- [local-cicd.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/local/local-cicd.sh)
+- mac: [2_run_local_cicd.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/mac/2_run_local_cicd.sh)
+- Windows: [2_run_local_cicd.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/self-hosted-runner/windows/2_run_local_cicd.bat)
 
 ## 5. 로컬 배포 순서
 
