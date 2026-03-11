@@ -118,6 +118,8 @@ public class ReactiveAuthorization implements ReactiveAuthorizationManager<Autho
                 log.error("토큰 인증 오류 Exception : {}", e.getMessage());
                 throw new AuthorizationServiceException("토큰 인증 오류");
             }
+        }else{
+            throw new AuthorizationServiceException("토큰 오류");
         }
 
         boolean granted = false;
