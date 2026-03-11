@@ -5,12 +5,14 @@ metadata:
   labels:
     app.kubernetes.io/name: apigateway
 spec:
+#  쿠버네티스를 설정
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: apigateway
   ports:
     - name: http
       port: 8000
+#      외부 포트 의미
       targetPort: 8000
 -----
 apiVersion: apps/v1
@@ -31,7 +33,9 @@ spec:
     spec:
       containers:
         - name: apigateway
+#          버전 의미
           image: apigateway:1.0.0
+#          이미지가 존재할 때만 진행할 것
           imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_PROFILES_ACTIVE
@@ -45,9 +49,11 @@ spec:
             - "-jar"
             - "/usr/app/apigateway.jar"
           ports:
+#           k8s 완전 외부가 아닌 외부 포트
             - containerPort: 8000
           readinessProbe:
             httpGet:
+#              해당 /actuator/health로 헬스 체크해서 주기적으로 서버가 살아 있는지 확인
               path: /actuator/health
               port: 8000
             initialDelaySeconds: 15
@@ -58,6 +64,7 @@ spec:
               port: 8000
             initialDelaySeconds: 45
             periodSeconds: 20
+#            경로에 있는 데이트를 컨테이너에 마운트 하겠다.
           volumeMounts:
             - name: messages
               mountPath: /usr/app/msa-attach-volume/messages
