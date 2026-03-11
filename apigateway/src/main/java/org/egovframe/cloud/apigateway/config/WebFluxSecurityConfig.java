@@ -33,7 +33,7 @@ public class WebFluxSecurityConfig {
 
     private final static String[] PERMITALL_ANTPATTERNS = {
             ReactiveAuthorization.AUTHORIZATION_URI, "/", "/csrf",
-            "/member-service/api/v1/login", "/?*-service/api/v1/messages/**", "/api/v1/messages/**",
+            "/backend5-service/api/member/login", "/?*-service/api/v1/messages/**", "/api/v1/messages/**",
             "/member-service/api/v1/refresh/token",
             "/?*-service/actuator/?*", "/actuator/?*",
             "/actuator/gateway/**",
