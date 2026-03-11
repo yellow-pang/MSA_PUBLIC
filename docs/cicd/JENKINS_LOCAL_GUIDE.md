@@ -33,9 +33,10 @@ Jenkins가 실행되는 장비 안에 아래도 있어야 합니다.
 
 ## 4. Jenkins가 실행할 파일
 
-가장 단순한 기준은 이 스크립트입니다.
+운영체제에 맞는 스크립트를 골라서 실행하면 됩니다.
 
-- [4_run_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/4_run_local_deploy.sh)
+- mac: [4_run_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/4_run_local_deploy.sh)
+- Windows: [4_run_local_deploy.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/4_run_local_deploy.bat)
 
 이 스크립트가 하는 일:
 
@@ -47,16 +48,22 @@ Jenkins가 실행되는 장비 안에 아래도 있어야 합니다.
 
 Swagger 응답 확인은 아래 스크립트로 분리했습니다.
 
-- [5_check_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/5_check_local_deploy.sh)
+- mac: [5_check_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/5_check_local_deploy.sh)
+- Windows: [5_check_local_deploy.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/5_check_local_deploy.bat)
 
 같이 보면 좋은 파일:
 
 - [README.md](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/README.md)
-- [1_install_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/1_install_jenkins.sh)
-- [2_start_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/2_start_jenkins.sh)
-- [3_show_admin_password.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/3_show_admin_password.sh)
-- [5_check_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/5_check_local_deploy.sh)
-- [6_stop_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/6_stop_jenkins.sh)
+- mac: [1_install_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/1_install_jenkins.sh)
+- mac: [2_start_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/2_start_jenkins.sh)
+- mac: [3_show_admin_password.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/3_show_admin_password.sh)
+- mac: [5_check_local_deploy.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/5_check_local_deploy.sh)
+- mac: [6_stop_jenkins.sh](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/mac/6_stop_jenkins.sh)
+- Windows: [1_install_jenkins.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/1_install_jenkins.bat)
+- Windows: [2_start_jenkins.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/2_start_jenkins.bat)
+- Windows: [3_show_admin_password.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/3_show_admin_password.bat)
+- Windows: [5_check_local_deploy.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/5_check_local_deploy.bat)
+- Windows: [6_stop_jenkins.bat](/Users/parkjinwoo/source/study/grepp_BE2/MSA/scripts/jenkins/windows/6_stop_jenkins.bat)
 
 ## 5. Jenkins Job은 뭘 쓰나
 
@@ -66,13 +73,20 @@ Swagger 응답 확인은 아래 스크립트로 분리했습니다.
 
 1. 저장소 checkout
 2. 쉘 실행
-3. `4_run_local_deploy.sh` 호출
+3. 운영체제에 맞는 `4_run_local_deploy` 스크립트 호출
 
 ## 6. 가장 단순한 실행 명령
 
 ```bash
 cd /Users/parkjinwoo/source/study/grepp_BE2
-IMAGE_REGISTRY=local IMAGE_TAG=jenkins-${BUILD_NUMBER} ./MSA/scripts/jenkins/4_run_local_deploy.sh
+IMAGE_REGISTRY=local IMAGE_TAG=jenkins-${BUILD_NUMBER} ./MSA/scripts/jenkins/mac/4_run_local_deploy.sh
+```
+
+```bat
+cd \Users\parkjinwoo\source\study\grepp_BE2
+set IMAGE_REGISTRY=local
+set IMAGE_TAG=jenkins-%BUILD_NUMBER%
+MSA\scripts\jenkins\windows\4_run_local_deploy.bat
 ```
 
 ## 7. Jenkins에 넣을 값
@@ -87,8 +101,8 @@ IMAGE_REGISTRY=local IMAGE_TAG=jenkins-${BUILD_NUMBER} ./MSA/scripts/jenkins/4_r
 
 ## 8. 추천 순서
 
-1. 터미널에서 `4_run_local_deploy.sh` 수동 성공
-2. Jenkins에서 `4_run_local_deploy.sh` 실행
+1. 터미널에서 운영체제에 맞는 `4_run_local_deploy` 수동 성공
+2. Jenkins에서 같은 스크립트 실행
 3. Git push 후 자동 실행 연결
 
 ## 9. 자주 막히는 부분
@@ -115,5 +129,5 @@ IMAGE_REGISTRY=local IMAGE_TAG=jenkins-${BUILD_NUMBER} ./MSA/scripts/jenkins/4_r
 ## 10. 한 줄 정리
 
 ```text
-Jenkins가 4_run_local_deploy.sh를 대신 실행해주는 구조
+Jenkins가 운영체제에 맞는 4_run_local_deploy 스크립트를 대신 실행해주는 구조
 ```
