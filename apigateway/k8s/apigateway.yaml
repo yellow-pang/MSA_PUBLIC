@@ -46,8 +46,8 @@ spec:
               value: http://config-service:8888
             - name: SERVER_PORT
               value: "8000"
-#            - name: TOKEN_SECRET
-#              value: "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAojbUV7N5EBivQEQoqRt16JhKdVZxsTtRjj7nw5RsyD+TBoUxdMyOTq6aIUrNS6ncCqGDTLEbbYqavyjlk6A0jqWViaEjp2EabigyZXXCr28xh90VCE4kbLvtP9mqtLWWJAtG0kN8YyY2i4a8ZHlCDmVT3ZgxaHQhaz1jroBc1RA8EReYzLOt2BHXakdkzMMkgEy3IH/2gw8J9ks+/kh71FhR9MzL+ZSK/DU7oNmvTwLGUSAaTfCuHxqMNhyz3wRmegPP2EObV9opDURscE7mls7UR8koMv0nkXbKQKsxD2npPoD9HBh5AoZh5ocsvNdO1OXMSNs2Ii1pgGc24rjZXxyisYBkV4wpvHLoawS7SrRsmYwy6UjdW9d789fx8ZuRiAxiCqq5pZdECca66Cad7t+hIwtVvTcJAVNWgvUujXBZABKtzaOATZk0sSduSgFXpB9HxARBSIc2c4uePueBnlPe/29a5PkFo6dUHsaACIFjduoYVYfR+3RNbKWm9Rw5AgMBAAE="
+            - name: TOKEN_SECRET
+              value: "token_secret"
           ports:
             - containerPort: 8000
           readinessProbe:
