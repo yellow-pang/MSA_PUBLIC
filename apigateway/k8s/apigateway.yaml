@@ -2,23 +2,23 @@ apiVersion: v1
 kind: Service
 metadata:
   name: apigateway
+  namespace: msa
   labels:
     app.kubernetes.io/name: apigateway
 spec:
-#  쿠버네티스를 설정
   type: LoadBalancer
   selector:
     app.kubernetes.io/name: apigateway
   ports:
     - name: http
       port: 8000
-#      외부 포트 의미
       targetPort: 8000
------
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apigateway
+  namespace: msa
   labels:
     app.kubernetes.io/name: apigateway
 spec:
@@ -33,27 +33,25 @@ spec:
     spec:
       containers:
         - name: apigateway
-#          버전 의미
-          image: apigateway:1.0.0
-#          이미지가 존재할 때만 진행할 것
+          image: apigateway:dev
           imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: k8s
+              value: default
+            - name: SPRING_APPLICATION_NAME
+              value: apigateway
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: discovery
             - name: SPRING_CLOUD_CONFIG_URI
-              value: http://config-service.default.svc.cluster.local:8888
-          command: ["java"]
-          args:
-            - "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}"
-            - "-Dlogstash.url=${LOGSTASH_URL}"
-            - "-jar"
-            - "/usr/app/apigateway.jar"
+              value: http://config-service:8888
+            - name: SERVER_PORT
+              value: "8000"
+#            - name: TOKEN_SECRET
+#              value: "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAojbUV7N5EBivQEQoqRt16JhKdVZxsTtRjj7nw5RsyD+TBoUxdMyOTq6aIUrNS6ncCqGDTLEbbYqavyjlk6A0jqWViaEjp2EabigyZXXCr28xh90VCE4kbLvtP9mqtLWWJAtG0kN8YyY2i4a8ZHlCDmVT3ZgxaHQhaz1jroBc1RA8EReYzLOt2BHXakdkzMMkgEy3IH/2gw8J9ks+/kh71FhR9MzL+ZSK/DU7oNmvTwLGUSAaTfCuHxqMNhyz3wRmegPP2EObV9opDURscE7mls7UR8koMv0nkXbKQKsxD2npPoD9HBh5AoZh5ocsvNdO1OXMSNs2Ii1pgGc24rjZXxyisYBkV4wpvHLoawS7SrRsmYwy6UjdW9d789fx8ZuRiAxiCqq5pZdECca66Cad7t+hIwtVvTcJAVNWgvUujXBZABKtzaOATZk0sSduSgFXpB9HxARBSIc2c4uePueBnlPe/29a5PkFo6dUHsaACIFjduoYVYfR+3RNbKWm9Rw5AgMBAAE="
           ports:
-#           k8s 완전 외부가 아닌 외부 포트
             - containerPort: 8000
           readinessProbe:
             httpGet:
-#              해당 /actuator/health로 헬스 체크해서 주기적으로 서버가 살아 있는지 확인
               path: /actuator/health
               port: 8000
             initialDelaySeconds: 15
@@ -64,7 +62,6 @@ spec:
               port: 8000
             initialDelaySeconds: 45
             periodSeconds: 20
-#            경로에 있는 데이트를 컨테이너에 마운트 하겠다.
           volumeMounts:
             - name: messages
               mountPath: /usr/app/msa-attach-volume/messages
